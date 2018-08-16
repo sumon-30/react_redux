@@ -30,6 +30,7 @@ const initialState = {
     };
     const rootReducer = (state = initialState, action) => state;
     export default rootReducer;
+** Create Combine Reducer
 
 4. Create Action
 - mkdir -p src/js/actions
@@ -62,7 +63,31 @@ const initialState = {
 11. mkdir -p src/js/components
      touch src/js/components/List.js
      touch src/js/components/Form.js
+     dataimport { 
+        loadArticles 
+    } from './../actions'
+    const mapStateToProps = state => {
+      return { articles: state.articleReducer.articles };
+    };
+
+    componentDidMount(){
+
+        this.props.loadArticles()  // redux_step1 go to 'Actions' 
+        
+    }
 12. npm i uuid --save-dev
 
 Reference
 https://www.valentinog.com/blog/react-redux-tutorial-beginners/
+
+Redux Data Workflow
+eg. list component
+1.component(componentDidMount) -----> 2.action ----> 3.Reducer ---> 4.component(mapStateToProps)---> 5.component(display data)
+
+**** What is Store? ****
+
+A store holds the whole state tree of your application.
+The only way to change the state inside it is to dispatch an action on it.
+
+A store is not a class. It's just an object with a few methods on it.
+To create it, pass your root reducing function to createStore.
